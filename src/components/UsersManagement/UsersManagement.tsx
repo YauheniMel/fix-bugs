@@ -6,7 +6,7 @@ import LoadingScreen from '../LoadingScreen';
 import Header from './components/Header/Header';
 import {Route, Switch} from "react-router-dom";
 import {Routes} from '~/constants';
-import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
+import itemHasWeakPassword from "~/utils/itemHasWeakPassword"; // this is not used
 import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
 import { useUserContext } from '../UserContext';
 

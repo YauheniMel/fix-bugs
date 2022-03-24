@@ -17,6 +17,7 @@ const Login = () => {
     setErrorMessage(null);
 
     try {
+      // need to use <LoadingScreen/>
       await login(username, password);
       push(Routes.Users);
     } catch (error) {
