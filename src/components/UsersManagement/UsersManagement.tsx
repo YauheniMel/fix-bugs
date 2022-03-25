@@ -41,7 +41,10 @@ const UsersManagement = () => {
           <List items={items} setItems={setItems}/>
         </Route>
         <Route path={Routes.Weak}>
-          <List items={items} setItems={setItems}/>
+          <List
+            items={items.filter((item) => !item.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))}
+            setItems={setItems}
+          />
         </Route>
         <Route path={Routes.Reused}>
           <List
