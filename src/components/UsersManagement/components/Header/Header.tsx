@@ -33,6 +33,7 @@ const Header: FC<IHeader> = ({items, username}) => {
         <button onClick={handleLogout}>{`Logout ${username}`}</button>
         { errorMessage && <p>Error</p>}
       </div>
+      {/* too much h1 */}
       <h1>{`${items.length} Emails are wrong`}</h1>
       <span>Email validator to protect your company from bad registrations</span>
     </div>
