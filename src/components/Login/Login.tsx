@@ -44,6 +44,7 @@ const Login = () => {
           placeholder="Password"
           type="password"
           className="input mt-24px"
+           // need autoComplete="on"
         />
         <ErrorBlock error={errorMessage}/>
         <button type="submit" className="button mt-24px">
