@@ -23,36 +23,43 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
       <button className="update" onClick={() => setShowModal(true)}>
         Update Password
       </button>
-      <Modal
-        className="modal"
-        isOpen={showModal}
-        // may add ariaHideApp={false}
-        onRequestClose={() => setShowModal(false)}
-        contentLabel="Example Modal"
-      >
-        <h1>Update Password</h1>
-        <input
-          placeholder="new password"
-          className="input"
-          value={newEmail}
-          onChange={(event) => setNewEmail(event.target.value)}
-        />
-        <div className="pt-12px text-center">
-          <button className="button" onClick={async () => {
-            await updateItem({
-              ...item,
-              email: newEmail,
-            })
+      {
+        showModal ?
+          (
+            // need create Modal component
+            <Modal
+              className="modal"
+              isOpen={showModal}
+              appElement={document.getElementById('app')}
+              onRequestClose={() => setShowModal(false)}
+              contentLabel="Example Modal"
+            >
+              <h1>Update Password</h1>
+              <input
+                placeholder="new password"
+                className="input"
+                value={newEmail}
+                onChange={(event) => setNewEmail(event.target.value)}
+              />
+              <div className="pt-12px text-center">
+                <button className="button" onClick={async () => {
+                  await updateItem({
+                    ...item,
+                    email: newEmail,
+                  })
 
-            window.location.reload(); // don't need to reload the page
-          }}>Change</button>
-          <button className="button ml-12px" onClick={() => {
-            setShowModal(false)
-          }}>
-            Cancel
-          </button>
-        </div>
-      </Modal>
+                  window.location.reload(); // don't need to reload the page
+                }}>Change</button>
+                <button className="button ml-12px" onClick={() => {
+                  setShowModal(false)
+                }}>
+                  Cancel
+                </button>
+              </div>
+            </Modal>
+          )
+          : null
+      }
     </>
   );
 }
@@ -60,8 +67,8 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
 const List: FC<IList> = ({items}) => (
   <ul className="list">
     {
-      items.map((item) => ( // need a key for each item
-        <li className="item">
+      items.map((item) => (
+        <li className="item" key={item.id}>
           <ItemIcon name={item.name}/>
           <div>
             <div className="title">

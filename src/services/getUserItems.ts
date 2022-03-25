@@ -8,6 +8,7 @@ export enum Roles {
 }
 
 export interface IItem {
+  id: string,
   name: string,
   role: Roles,
   email: string,
