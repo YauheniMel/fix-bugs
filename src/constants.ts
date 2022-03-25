@@ -10,4 +10,5 @@ export enum API {
   Login = 'api/login',
   Items = 'api/items',
   User = 'api/user',
+  Logout = 'api/logout',
 }

@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import getUserItems, {IItem} from '../../services/getUserItems';
 
-const userItemsProvider = () => {
+const useItemsProvider = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState<String>();
   const [items, setItems] = useState<Array<IItem>>([])
@@ -29,4 +29,4 @@ const userItemsProvider = () => {
   }
 };
 
-export default userItemsProvider;
+export default useItemsProvider;

@@ -11,7 +11,7 @@ interface IFilter {
 
 const Filter: FC<IFilter> = ({items}) => {
   const weakItemsCount = items.reduce((count, item) => (
-     (count + 1) 
+     (count + 1)
   ), 0)
 
   const reusedItemsCount = items.reduce((count, item) => (
@@ -20,6 +20,7 @@ const Filter: FC<IFilter> = ({items}) => {
 
   return (
     <div className="filter">
+      {/* there is wrong 'count' */}
       <FilterTab title="all" count={items.length} path={Routes.Users}/>
       <FilterTab title="Wrong" count={weakItemsCount} path={Routes.Weak}/>
       <FilterTab title="Reused" count={reusedItemsCount} path={Routes.Reused}/>

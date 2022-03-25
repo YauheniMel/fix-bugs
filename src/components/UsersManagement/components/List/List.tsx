@@ -26,6 +26,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
       <Modal
         className="modal"
         isOpen={showModal}
+        // may add ariaHideApp={false}
         onRequestClose={() => setShowModal(false)}
         contentLabel="Example Modal"
       >
@@ -34,7 +35,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
           placeholder="new password"
           className="input"
           value={newEmail}
-          onChange={(event) => setNewEmail(event.target.value)} 
+          onChange={(event) => setNewEmail(event.target.value)}
         />
         <div className="pt-12px text-center">
           <button className="button" onClick={async () => {
@@ -43,7 +44,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
               email: newEmail,
             })
 
-            window.location.reload();
+            window.location.reload(); // don't need to reload the page
           }}>Change</button>
           <button className="button ml-12px" onClick={() => {
             setShowModal(false)
@@ -59,7 +60,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
 const List: FC<IList> = ({items}) => (
   <ul className="list">
     {
-      items.map((item) => (
+      items.map((item) => ( // need a key for each item
         <li className="item">
           <ItemIcon name={item.name}/>
           <div>

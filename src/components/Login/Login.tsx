@@ -17,6 +17,7 @@ const Login = () => {
     setErrorMessage(null);
 
     try {
+      // need to use <LoadingScreen/>
       await login(username, password);
       push(Routes.Users);
     } catch (error) {
@@ -43,6 +44,7 @@ const Login = () => {
           placeholder="Password"
           type="password"
           className="input mt-24px"
+           // need autoComplete="on"
         />
         <ErrorBlock error={errorMessage}/>
         <button type="submit" className="button mt-24px">
