@@ -10,9 +10,9 @@ interface IFilter {
 }
 
 const Filter: FC<IFilter> = ({items}) => {
-  const weakItemsCount = items.reduce((count, item) => (
-     (count + 1)
-  ), 0)
+  const itemsWrongEmails = items.filter((item) => {
+    return !item.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+  });
 
   const reusedItemsCount = items.reduce((count, item) => (
     (count + 1)
@@ -20,9 +20,9 @@ const Filter: FC<IFilter> = ({items}) => {
 
   return (
     <div className="filter">
-      {/* there is wrong 'count' */}
       <FilterTab title="all" count={items.length} path={Routes.Users}/>
-      <FilterTab title="Wrong" count={weakItemsCount} path={Routes.Weak}/>
+      <FilterTab title="Wrong" count={itemsWrongEmails.length} path={Routes.Weak}/>
+      {/* there is wrong 'count' */}
       <FilterTab title="Reused" count={reusedItemsCount} path={Routes.Reused}/>
     </div>
   );
