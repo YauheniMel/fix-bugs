@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 import {Routes} from '~/constants';
 import login from '~/services/login';
 import ErrorBlock from '../ErrorBlock';
+import LoadingScreen from '../LoadingScreen';
 
 import './login-style.scss';
 
@@ -10,20 +11,27 @@ const Login = () => {
   const {push} = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>();
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrorMessage(null);
+    setIsLoading(true);
 
     try {
-      // need to use <LoadingScreen/>
       await login(username, password);
       push(Routes.Users);
     } catch (error) {
       setErrorMessage(error.message);
     }
+
+    setIsLoading(false);
   };
+
+  if (isLoading) {
+    return <LoadingScreen/>
+  }
 
   return (
     <div className="login-page">
@@ -44,7 +52,6 @@ const Login = () => {
           placeholder="Password"
           type="password"
           className="input mt-24px"
-           // need autoComplete="on"
         />
         <ErrorBlock error={errorMessage}/>
         <button type="submit" className="button mt-24px">
