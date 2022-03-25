@@ -60,8 +60,8 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
 const List: FC<IList> = ({items}) => (
   <ul className="list">
     {
-      items.map((item) => ( // need a key for each item
-        <li className="item">
+      items.map((item) => (
+        <li className="item" key={item.id}>
           <ItemIcon name={item.name}/>
           <div>
             <div className="title">
