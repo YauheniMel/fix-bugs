@@ -26,7 +26,7 @@ export const employees = [
     name: "Petras Petraitis",
     role: Roles.read,
     email: "test@test.com",
-    createdAt: new Date(new Date().setMonth(new Date().getMonth() - 2)).toISOString() // Is this an old email?
+    createdAt: new Date(new Date().setMonth(new Date().getMonth() - 2)).toISOString()
   },
   {
     id: "003",

@@ -42,13 +42,29 @@ const UsersManagement = () => {
         </Route>
         <Route path={Routes.Weak}>
           <List
-            items={items.filter((item) => !item.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))}
+            items={items.filter((item) => !item.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))} // need to move it
             setItems={setItems}
           />
         </Route>
         <Route path={Routes.Reused}>
           <List
             items={items.filter((item) => itemHasReusedPassword(item, items))}
+            setItems={setItems}
+          />
+        </Route>
+        <Route path={Routes.Old}>
+          <List
+            items={items.filter((item) => {
+              // need to move it
+              const time = new Date(item.createdAt);
+              const now = new Date();
+
+              const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+
+              const diffTime = now.getTime() - time.getTime();
+
+              return diffTime > thirtyDays ? true : false;
+            })}
             setItems={setItems}
           />
         </Route>
