@@ -26,6 +26,7 @@ const useItemsProvider = () => {
     isLoading,
     errorMessage,
     items,
+    setItems
   }
 };
 

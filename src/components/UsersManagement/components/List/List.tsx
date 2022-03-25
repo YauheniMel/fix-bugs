@@ -1,5 +1,5 @@
 import {FC, useState} from 'react';
-import {IItem} from "~/services/getUserItems";
+import getUserItems, {IItem, Roles} from "~/services/getUserItems";
 import ItemIcon from './components/ItemIcon';
 import updateItem from '../../../../services/updateItem';
 import Modal from 'react-modal';
@@ -8,13 +8,15 @@ import './list-style.scss';
 
 interface IList {
   items: Array<IItem>,
+  setItems: (items: Array<IItem>) => void
 }
 
 interface IUpdateModal {
   item: IItem;
+  setItems: (items: Array<IItem>) => void
 }
 
-const UpdateModal: FC<IUpdateModal> = ({ item }) => {
+const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
   const [showModal, setShowModal] = useState(false);
   const [newEmail, setNewEmail] = useState('');
 
@@ -26,7 +28,6 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
       {
         showModal ?
           (
-            // need create Modal component
             <Modal
               className="modal"
               isOpen={showModal}
@@ -48,7 +49,11 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
                     email: newEmail,
                   })
 
-                  window.location.reload(); // don't need to reload the page
+                  const userItems = await getUserItems();
+
+                  setItems(userItems);
+
+                  setShowModal(false)
                 }}>Change</button>
                 <button className="button ml-12px" onClick={() => {
                   setShowModal(false)
@@ -64,7 +69,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item }) => {
   );
 }
 
-const List: FC<IList> = ({items}) => (
+const List: FC<IList> = ({items, setItems}) => (
   <ul className="list">
     {
       items.map((item) => (
@@ -78,7 +83,7 @@ const List: FC<IList> = ({items}) => (
               {item.email}
             </div>
           </div>
-          <UpdateModal item={item} />
+          <UpdateModal item={item} setItems={setItems}/>
         </li>
       ))
     }

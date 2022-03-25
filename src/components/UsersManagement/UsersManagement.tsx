@@ -17,10 +17,11 @@ const UsersManagement = () => {
     username,
   } = useUserContext();
 
-  const {
+  let {
     items,
     isLoading,
     errorMessage,
+    setItems
   } = useItemsProvider();
 
   if (isLoading || userDataIsLoading) {
@@ -37,13 +38,16 @@ const UsersManagement = () => {
       <Filter items={items}/>
       <Switch>
         <Route exact path={Routes.Users}>
-          <List items={items}/>
+          <List items={items} setItems={setItems}/>
         </Route>
         <Route path={Routes.Weak}>
-          <List items={items}/>
+          <List items={items} setItems={setItems}/>
         </Route>
         <Route path={Routes.Reused}>
-          <List items={items.filter((item) => itemHasReusedPassword(item, items))}/>
+          <List
+            items={items.filter((item) => itemHasReusedPassword(item, items))}
+            setItems={setItems}
+          />
         </Route>
       </Switch>
     </div>
