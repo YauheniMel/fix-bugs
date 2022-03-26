@@ -1,6 +1,6 @@
-import {SyntheticEvent, useState} from 'react';
-import {useHistory} from 'react-router-dom';
-import {Routes} from '~/constants';
+import { SyntheticEvent, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Routes } from '~/constants';
 import login from '~/services/login';
 import ErrorBlock from '../ErrorBlock';
 import LoadingScreen from '../LoadingScreen';
@@ -8,7 +8,7 @@ import LoadingScreen from '../LoadingScreen';
 import './login-style.scss';
 
 const Login = () => {
-  const {push} = useHistory();
+  const { push } = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -30,15 +30,13 @@ const Login = () => {
   };
 
   if (isLoading) {
-    return <LoadingScreen/>
+    return <LoadingScreen />;
   }
 
   return (
     <div className="login-page">
       <form className="login-form" onSubmit={handleSubmit}>
-        <h1 className="text-center">
-          Mygom.tech
-        </h1>
+        <h1 className="text-center">Mygom.tech</h1>
         <input
           value={username}
           onChange={(event) => setUsername(event.target.value)}
@@ -53,13 +51,13 @@ const Login = () => {
           type="password"
           className="input mt-24px"
         />
-        <ErrorBlock error={errorMessage}/>
+        <ErrorBlock error={errorMessage} />
         <button type="submit" className="button mt-24px">
           Login
         </button>
       </form>
     </div>
-  )
+  );
 };
 
 export default Login;

@@ -1,4 +1,4 @@
-import {API} from '~/constants';
+import { API } from '~/constants';
 import getUrl from '../utils/getUrl';
 
 const login = async (username: string, password: string) => {
