@@ -7,7 +7,22 @@
     "test": "jest",
     "start:server": "ts-node ./server/index.ts",
     "start:web": "webpack serve",
-    "start": "run-p start:*"
+    "start": "run-p start:*",
+    "eslint": "eslint src/",
+    "style": "npx stylelint **/*.scss",
+    "prettier": "npx prettier src/ --check",
+    "format": "npx prettier src/ --write & npx stylelint **/*.scss --fix & eslint src/ --fix"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint-config-airbnb-base",
+      "airbnb-typescript",
+      "react-app",
+      "react-app/jest"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    }
   },
   "dependencies": {
     "@types/jest": "^26.0.20",
@@ -32,11 +47,25 @@
   "devDependencies": {
     "@types/express": "^4.17.9",
     "@types/faker": "^5.1.5",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
     "cors": "^2.8.5",
     "dotenv-webpack": "^6.0.0",
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^16.1.4",
+    "eslint-config-react-app": "^7.0.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-config-prettier": "^8.5.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.1",
     "npm-run-all": "^4.1.5",
+    "prettier": "2.6.1",
+    "stylelint": "^14.6.1",
+    "stylelint-config-prettier-scss": "^0.0.1",
+    "stylelint-config-standard-scss": "^3.0.0",
     "ts-loader": "^8.0.14",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.1",

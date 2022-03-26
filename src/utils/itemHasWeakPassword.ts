@@ -1,7 +1,5 @@
-import {IItem} from "~/services/getUserItems";
+import { IItem } from '~/services/getUserItems';
 
-const itemHasWeakPassword = (item: IItem) => {
-  return true;
-};
+const itemHasWeakPassword = (item: IItem) => true;
 
 export default itemHasWeakPassword;
