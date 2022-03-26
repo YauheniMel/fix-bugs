@@ -24,6 +24,10 @@ const Login = () => {
     setIsLoading(true);
 
     try {
+      if (loginAlert || passwordAlert) {
+        throw new Error('Invalid form');
+      }
+
       await login(username, password);
       push(Routes.Users);
     } catch (error) {
