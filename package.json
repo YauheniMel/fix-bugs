@@ -14,9 +14,9 @@
     "format": "npx prettier src/ --write & npx stylelint **/*.scss --fix & eslint src/ --fix"
   },
   "lint-staged": {
-    "*.{tsx, ts}": "eslint --fix",
-    "*.scss": "npx stylelint --fix",
-    "*.{tsx,ts,css,scss,md}": "npx prettier --write"
+    "*.{tsx, ts}": ["eslint --fix"],
+    "*.scss": ["npx stylelint --fix"],
+    "*.{tsx,ts,css,scss,md}": ["npx prettier --write"]
   },
   "eslintConfig": {
     "extends": [
