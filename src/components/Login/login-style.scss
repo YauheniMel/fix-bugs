@@ -1,5 +1,7 @@
+@import '../../style/variables';
+
 .login-page {
-  background: url('/public/assets/mountain.jpg');
+  background-image: url('/public/assets/mountain.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -13,8 +15,22 @@
     justify-content: center;
     flex-direction: column;
     background-color: white;
+    row-gap: 40px;
     padding: 50px;
-    width: 350px;
     height: 400px;
+
+    label {
+      position: relative;
+    }
+
+    input {
+      width: 350px;
+    }
+
+    .alert {
+      position: absolute;
+      bottom: -100%;
+      color: $red;
+    }
   }
 }
