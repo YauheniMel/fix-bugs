@@ -9,6 +9,7 @@ import {Routes} from '~/constants';
 import itemHasWeakPassword from "~/utils/itemHasWeakPassword"; // this is not used
 import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
 import { useUserContext } from '../UserContext';
+import { IItem } from '~/services/getUserItems';
 
 const UsersManagement = () => {
   const {
@@ -24,6 +25,25 @@ const UsersManagement = () => {
     setItems
   } = useItemsProvider();
 
+  const getItems = (type: 'old' | 'wrong'): Array<IItem> => {
+    if(type === 'wrong') {
+      const emailRegExp = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+
+      return items.filter((item) => !item.email.match(emailRegExp));
+    }
+
+    return items.filter((item) => {
+      const time = new Date(item.createdAt);
+      const now = new Date();
+
+      const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+
+      const diffTime = now.getTime() - time.getTime();
+
+      return diffTime > thirtyDays ? true : false;
+    })
+  }
+
   if (isLoading || userDataIsLoading) {
     return <LoadingScreen/>
   }
@@ -35,14 +55,17 @@ const UsersManagement = () => {
   return (
     <div className="container">
       <Header items={items} username={username} />
-      <Filter items={items}/>
+      <Filter
+        items={items}
+        getItems={getItems}
+      />
       <Switch>
         <Route exact path={Routes.Users}>
           <List items={items} setItems={setItems}/>
         </Route>
         <Route path={Routes.Weak}>
           <List
-            items={items.filter((item) => !item.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))} // need to move it
+            items={getItems('wrong')}
             setItems={setItems}
           />
         </Route>
@@ -54,17 +77,7 @@ const UsersManagement = () => {
         </Route>
         <Route path={Routes.Old}>
           <List
-            items={items.filter((item) => {
-              // need to move it
-              const time = new Date(item.createdAt);
-              const now = new Date();
-
-              const thirtyDays = 30 * 24 * 60 * 60 * 1000;
-
-              const diffTime = now.getTime() - time.getTime();
-
-              return diffTime > thirtyDays ? true : false;
-            })}
+            items={getItems('old')}
             setItems={setItems}
           />
         </Route>
