@@ -7,12 +7,10 @@ import './filter-style.scss';
 
 interface IFilter {
   items: Array<IItem>;
+  getItems: (action: 'old' | 'wrong') => Array<IItem>;
 }
 
-const Filter: FC<IFilter> = ({items}) => {
-  const itemsWrongEmails = items.filter((item) => {
-    return !item.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
-  });
+const Filter: FC<IFilter> = ({items, getItems}) => {
 
   const reusedItemsCount = items.reduce((count, item) => (
     (count + 1)
@@ -21,9 +19,10 @@ const Filter: FC<IFilter> = ({items}) => {
   return (
     <div className="filter">
       <FilterTab title="all" count={items.length} path={Routes.Users}/>
-      <FilterTab title="Wrong" count={itemsWrongEmails.length} path={Routes.Weak}/>
-      {/* there is wrong 'count' */}
+      <FilterTab title="Wrong" count={getItems('wrong').length} path={Routes.Weak}/>
+      {/* reused?????? */}
       <FilterTab title="Reused" count={reusedItemsCount} path={Routes.Reused}/>
+      <FilterTab title="Old" count={getItems('old').length} path={Routes.Old}/>
     </div>
   );
 };
