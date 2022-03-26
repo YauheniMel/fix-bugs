@@ -24,7 +24,8 @@ const UsersManagement = () => {
 
   const getItems = (type: 'old' | 'wrong'): Array<IItem> => {
     if (type === 'wrong') {
-      const emailRegExp = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+      const pattern = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+      const emailRegExp = new RegExp(pattern);
 
       return items.filter((item) => !item.email.match(emailRegExp));
     }
