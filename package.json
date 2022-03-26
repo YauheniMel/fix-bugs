@@ -10,7 +10,8 @@
     "start": "run-p start:*",
     "eslint": "eslint src/",
     "style": "npx stylelint **/*.scss",
-    "prettier": "npx prettier src/ --check"
+    "prettier": "npx prettier src/ --check",
+    "format": "npm run eslint & npm run style & npm run prettier"
   },
   "eslintConfig": {
     "extends": [
