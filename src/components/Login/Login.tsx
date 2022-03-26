@@ -73,9 +73,7 @@ const Login = () => {
           </p>
         </label>
         <ErrorBlock error={errorMessage} />
-        <button type="submit" className="button">
-          Login
-        </button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );

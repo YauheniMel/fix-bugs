@@ -14,10 +14,9 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: white;
+    background-color: $white;
     row-gap: 40px;
     padding: 50px;
-    height: 400px;
 
     label {
       position: relative;
@@ -29,7 +28,6 @@
 
     .alert {
       position: absolute;
-      bottom: -100%;
       color: $red;
     }
   }
