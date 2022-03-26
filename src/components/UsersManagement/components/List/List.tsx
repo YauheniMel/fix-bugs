@@ -33,7 +33,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
           onRequestClose={() => setShowModal(false)}
           contentLabel="Example Modal"
         >
-          <h1>Update Password</h1>
+          <h3>Update Password</h3>
           <input
             placeholder="new password"
             className="input"
@@ -42,7 +42,6 @@ const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
           />
           <div className="pt-12px text-center">
             <button
-              className="button"
               onClick={async () => {
                 await updateItem({
                   ...item,
