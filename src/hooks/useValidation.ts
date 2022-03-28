@@ -4,7 +4,7 @@ const useValidation = (
   type: 'username' | 'password',
   value: string,
   minLength: number,
-  maxLength: number,
+  maxLength: number
 ) => {
   const [alert, setAlert] = useState<String>(null);
   const [touched, setTouched] = useState(false);
