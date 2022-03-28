@@ -6,7 +6,7 @@ import ErrorBlock from '../ErrorBlock';
 import LoadingScreen from '../LoadingScreen';
 
 import './login-style.scss';
-import useValidation from './useValidation';
+import useValidation from '../../hooks/useValidation';
 
 const Login = () => {
   const { push } = useHistory();
