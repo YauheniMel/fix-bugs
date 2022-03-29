@@ -7,25 +7,24 @@ import './filter-style.scss';
 
 interface IFilter {
   items: Array<IItem>;
-  getItems: (action: 'old' | 'wrong') => Array<IItem>;
+  getItems: (action: 'old' | 'wrong' | 'reused') => Array<IItem>;
 }
 
-const Filter: FC<IFilter> = ({ items, getItems }) => {
-  const reusedItemsCount = items.reduce((count, item) => count + 1, 0);
-
-  return (
-    <div className="filter">
-      <FilterTab title="all" count={items.length} path={Routes.Users} />
-      <FilterTab
-        title="Wrong"
-        count={getItems('wrong').length}
-        path={Routes.Weak}
-      />
-      {/* reused?????? */}
-      <FilterTab title="Reused" count={reusedItemsCount} path={Routes.Reused} />
-      <FilterTab title="Old" count={getItems('old').length} path={Routes.Old} />
-    </div>
-  );
-};
+const Filter: FC<IFilter> = ({ items, getItems }) => (
+  <div className="filter">
+    <FilterTab title="all" count={items.length} path={Routes.Users} />
+    <FilterTab
+      title="Wrong"
+      count={getItems('wrong').length}
+      path={Routes.Weak}
+    />
+    <FilterTab
+      title="Reused"
+      count={getItems('reused').length}
+      path={Routes.Reused}
+    />
+    <FilterTab title="Old" count={getItems('old').length} path={Routes.Old} />
+  </div>
+);
 
 export default Filter;
