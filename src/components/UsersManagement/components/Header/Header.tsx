@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ErrorBlock from '~/components/ErrorBlock';
 import { Routes } from '~/constants';
 import { IItem } from '~/services/getUserItems';
 import logout from '../../../../services/logout';
@@ -33,7 +32,6 @@ const Header: FC<IHeader> = ({ items, username }) => {
         <button onClick={handleLogout}>{`Logout ${username}`}</button>
         {errorMessage && <p>Error</p>}
       </div>
-      {/* wrong counter */}
       <h2>{`${items.length} Emails are wrong`}</h2>
       <span>
         Email validator to protect your company from bad registrations
