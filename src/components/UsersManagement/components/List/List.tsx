@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import Modal from 'react-modal';
-import getUserItems, { IItem, Roles } from '~/services/getUserItems';
+import getUserItems, { IItem } from '~/services/getUserItems';
 import ItemIcon from './components/ItemIcon';
 import updateItem from '../../../../services/updateItem';
 
@@ -16,20 +16,24 @@ interface IUpdateModal {
   setItems: (items: Array<IItem>) => void;
 }
 
-const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
+export const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
   const [showModal, setShowModal] = useState(false);
   const [newEmail, setNewEmail] = useState('');
 
   return (
     <>
-      <button className="update" onClick={() => setShowModal(true)}>
+      <button
+        className="update"
+        data-testid="button-update"
+        onClick={() => setShowModal(true)}
+      >
         Update Password
       </button>
       {showModal ? (
         <Modal
           className="modal"
           isOpen={showModal}
-          appElement={document.getElementById('app')}
+          ariaHideApp={false}
           onRequestClose={() => setShowModal(false)}
           contentLabel="Example Modal"
         >
@@ -75,7 +79,7 @@ const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
 const List: FC<IList> = ({ items, setItems }) => (
   <ul className="list">
     {items.map((item) => (
-      <li className="item" key={item.id}>
+      <li data-testid="list-item" className="item" key={item.id}>
         <ItemIcon name={item.name} />
         <div>
           <div className="title">{item.name}</div>

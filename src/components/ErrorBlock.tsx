@@ -9,7 +9,7 @@ const ErrorBlock: FC<IErrorBlock> = ({ error }) => {
     return null;
   }
 
-  return <div>{error}</div>;
+  return <div data-testid="error-elem">{error}</div>;
 };
 
 export default memo(ErrorBlock);

@@ -43,7 +43,7 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form" role="login-form" onSubmit={handleSubmit}>
         <h1 className="text-center">Mygom.tech</h1>
         <label>
           <input

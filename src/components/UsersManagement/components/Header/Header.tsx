@@ -1,6 +1,5 @@
 import { FC, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ErrorBlock from '~/components/ErrorBlock';
 import { Routes } from '~/constants';
 import { IItem } from '~/services/getUserItems';
 import logout from '../../../../services/logout';
