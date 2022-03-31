@@ -10,6 +10,13 @@ const config: Config.InitialOptions = {
       isolatedModules: true,
     },
   },
+  setupFilesAfterEnv: ['@testing-library/jest-dom'],
+  moduleNameMapper: {
+    '^~/(.*)$': '<rootDir>/src/$1',
+    '\\.(css|less|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
+  },
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
 };
 
 export default config;

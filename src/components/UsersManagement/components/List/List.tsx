@@ -1,80 +1,102 @@
-import {FC, useState} from 'react';
-import {IItem} from "~/services/getUserItems";
+import { FC, useState } from 'react';
+import Modal from 'react-modal';
+import getUserItems, { IItem } from '~/services/getUserItems';
 import ItemIcon from './components/ItemIcon';
 import updateItem from '../../../../services/updateItem';
-import Modal from 'react-modal';
 
 import './list-style.scss';
 
 interface IList {
-  items: Array<IItem>,
+  items: Array<IItem>;
+  setItems: (items: Array<IItem>) => void;
 }
 
 interface IUpdateModal {
   item: IItem;
+  setItems: (items: Array<IItem>) => void;
 }
 
-const UpdateModal: FC<IUpdateModal> = ({ item }) => {
+export const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
   const [showModal, setShowModal] = useState(false);
   const [newEmail, setNewEmail] = useState('');
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await updateItem({
+      ...item,
+      email: newEmail,
+    });
+
+    const userItems = await getUserItems();
+
+    setItems(userItems);
+
+    setNewEmail('');
+    setShowModal(false);
+  };
+
   return (
     <>
-      <button className="update" onClick={() => setShowModal(true)}>
+      <button
+        className="update"
+        data-testid="button-update"
+        onClick={() => setShowModal(true)}
+      >
         Update Password
       </button>
-      <Modal
-        className="modal"
-        isOpen={showModal}
-        onRequestClose={() => setShowModal(false)}
-        contentLabel="Example Modal"
-      >
-        <h1>Update Password</h1>
-        <input
-          placeholder="new password"
-          className="input"
-          value={newEmail}
-          onChange={(event) => setNewEmail(event.target.value)} 
-        />
-        <div className="pt-12px text-center">
-          <button className="button" onClick={async () => {
-            await updateItem({
-              ...item,
-              email: newEmail,
-            })
-
-            window.location.reload();
-          }}>Change</button>
-          <button className="button ml-12px" onClick={() => {
-            setShowModal(false)
-          }}>
-            Cancel
-          </button>
-        </div>
-      </Modal>
+      {showModal ? (
+        <Modal
+          className="modal"
+          isOpen={showModal}
+          ariaHideApp={false}
+          onRequestClose={() => setShowModal(false)}
+          contentLabel="Example Modal"
+        >
+          <h3>Update Password</h3>
+          <form onSubmit={handleSubmit}>
+            <input
+              placeholder="new password"
+              className="input"
+              value={newEmail}
+              onChange={(event) => setNewEmail(event.target.value)}
+            />
+            <div className="pt-12px text-center">
+              <button>Change</button>
+              <button
+                className="button ml-12px"
+                onClick={() => {
+                  setShowModal(false);
+                  setNewEmail('');
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </Modal>
+      ) : null}
     </>
   );
-}
+};
 
-const List: FC<IList> = ({items}) => (
+const List: FC<IList> = ({ items, setItems }) => (
   <ul className="list">
-    {
+    {items.length ? (
       items.map((item) => (
-        <li className="item">
-          <ItemIcon name={item.name}/>
+        <li data-testid="list-item" className="item" key={item.id}>
+          <ItemIcon name={item.name} />
           <div>
-            <div className="title">
-              {item.name}
-            </div>
-            <div className="description">
-              {item.email}
-            </div>
+            <div className="title">{item.name}</div>
+            <div className="description">{item.email}</div>
           </div>
-          <UpdateModal item={item} />
+          <UpdateModal item={item} setItems={setItems} />
         </li>
       ))
-    }
+    ) : (
+      <div style={{ textAlign: 'center' }}>Empty...</div>
+    )}
   </ul>
-)
+);
 
 export default List;

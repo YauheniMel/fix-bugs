@@ -1,10 +1,8 @@
-@import '../../../../style/_variables';
+@import '../../../../style/variables';
 
 .list {
   list-style: none;
   border-top: 2px solid $grey-light;
-  padding: 0;
-  margin: 0;
 
   .item {
     min-height: 32px;
@@ -13,7 +11,7 @@
     display: flex;
 
     .item-icon {
-      color: white;
+      color: $white;
       font-weight: bold;
       border-radius: 9px;
       height: 38px;
