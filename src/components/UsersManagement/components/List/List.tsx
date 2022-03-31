@@ -20,6 +20,22 @@ export const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
   const [showModal, setShowModal] = useState(false);
   const [newEmail, setNewEmail] = useState('');
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await updateItem({
+      ...item,
+      email: newEmail,
+    });
+
+    const userItems = await getUserItems();
+
+    setItems(userItems);
+
+    setNewEmail('');
+    setShowModal(false);
+  };
+
   return (
     <>
       <button
@@ -38,38 +54,26 @@ export const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
           contentLabel="Example Modal"
         >
           <h3>Update Password</h3>
-          <input
-            placeholder="new password"
-            className="input"
-            value={newEmail}
-            onChange={(event) => setNewEmail(event.target.value)}
-          />
-          <div className="pt-12px text-center">
-            <button
-              onClick={async () => {
-                await updateItem({
-                  ...item,
-                  email: newEmail,
-                });
-
-                const userItems = await getUserItems();
-
-                setItems(userItems);
-
-                setShowModal(false);
-              }}
-            >
-              Change
-            </button>
-            <button
-              className="button ml-12px"
-              onClick={() => {
-                setShowModal(false);
-              }}
-            >
-              Cancel
-            </button>
-          </div>
+          <form onSubmit={handleSubmit}>
+            <input
+              placeholder="new password"
+              className="input"
+              value={newEmail}
+              onChange={(event) => setNewEmail(event.target.value)}
+            />
+            <div className="pt-12px text-center">
+              <button>Change</button>
+              <button
+                className="button ml-12px"
+                onClick={() => {
+                  setShowModal(false);
+                  setNewEmail('');
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
         </Modal>
       ) : null}
     </>
