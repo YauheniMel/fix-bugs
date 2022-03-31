@@ -82,16 +82,20 @@ export const UpdateModal: FC<IUpdateModal> = ({ item, setItems }) => {
 
 const List: FC<IList> = ({ items, setItems }) => (
   <ul className="list">
-    {items.map((item) => (
-      <li data-testid="list-item" className="item" key={item.id}>
-        <ItemIcon name={item.name} />
-        <div>
-          <div className="title">{item.name}</div>
-          <div className="description">{item.email}</div>
-        </div>
-        <UpdateModal item={item} setItems={setItems} />
-      </li>
-    ))}
+    {items.length ? (
+      items.map((item) => (
+        <li data-testid="list-item" className="item" key={item.id}>
+          <ItemIcon name={item.name} />
+          <div>
+            <div className="title">{item.name}</div>
+            <div className="description">{item.email}</div>
+          </div>
+          <UpdateModal item={item} setItems={setItems} />
+        </li>
+      ))
+    ) : (
+      <div style={{ textAlign: 'center' }}>Empty...</div>
+    )}
   </ul>
 );
 
